@@ -2,7 +2,8 @@ use anyhow::Result;
 use next_custom_transforms::transforms::strip_page_exports::ExportFilter;
 use turbo_rcstr::RcStr;
 use turbo_tasks::{ResolvedVc, Vc};
-use turbopack::module_options::{ModuleRule, ModuleRuleEffect, RuleCondition};
+use turbopack::module_options::{ModuleRule, ModuleRuleEffect, ModuleType, RuleCondition};
+use turbopack_core::reference_type::{EntryReferenceSubType, ReferenceType};
 
 use crate::{
     mode::NextMode,
@@ -79,6 +80,19 @@ pub async fn get_next_server_transforms_rules(
             ]),
             // ]),
             vec![ModuleRuleEffect::Ignore],
+        ),
+        ModuleRule::new(
+            RuleCondition::all(vec![
+                RuleCondition::ReferenceType(ReferenceType::Entry(
+                    EntryReferenceSubType::AppClientComponent,
+                )),
+                RuleCondition::any(vec![
+                    RuleCondition::ResourcePathEndsWith(".module.css".into()),
+                    RuleCondition::ResourcePathEndsWith(".module.scss".into()),
+                    RuleCondition::ResourcePathEndsWith(".module.sass".into()),
+                ]),
+            ]),
+            vec![ModuleRuleEffect::ModuleType(ModuleType::CssModuleOnly)],
         ),
     ]);
 

@@ -55,7 +55,12 @@ impl Transition for NextCssClientReferenceTransition {
         let result: Vc<Box<dyn Module>> = if let Some(css_module_module) =
             ResolvedVc::try_downcast_type_sync::<ModuleCssAsset>(module)
         {
-            let ProcessResult::Module(client_module) = *css_module_module.inner().await? else {
+            let ProcessResult::Module(client_module) = *css_module_module
+                .inner(Value::new(
+                    turbopack_core::reference_type::CssReferenceSubType::Internal,
+                ))
+                .await?
+            else {
                 return Ok(ProcessResult::Ignore.cell());
             };
 

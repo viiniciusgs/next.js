@@ -121,8 +121,9 @@ export default class Error<P = {}> extends React.Component<P & ErrorProps> {
                 title
               ) : (
                 <>
-                  Application error: a client-side exception has occurred (see
-                  the browser console for more information)
+                  Application error: a client-side exception has occurred while
+                  loading {window.location.hostname} (see the browser console
+                  for more information)
                 </>
               )}
               .

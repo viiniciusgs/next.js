@@ -1179,7 +1179,7 @@ impl Project {
             transitions.push((
                 ECMASCRIPT_CLIENT_TRANSITION_NAME.into(),
                 app_project
-                    .edge_client_reference_transition()
+                    .edge_ecmascript_client_reference_transition()
                     .to_resolved()
                     .await?,
             ));
@@ -1265,7 +1265,7 @@ impl Project {
             transitions.push((
                 ECMASCRIPT_CLIENT_TRANSITION_NAME.into(),
                 app_project
-                    .client_reference_transition()
+                    .ecmascript_client_reference_transition()
                     .to_resolved()
                     .await?,
             ));
@@ -1320,7 +1320,7 @@ impl Project {
             transitions.push((
                 ECMASCRIPT_CLIENT_TRANSITION_NAME.into(),
                 app_project
-                    .edge_client_reference_transition()
+                    .edge_ecmascript_client_reference_transition()
                     .to_resolved()
                     .await?,
             ));
